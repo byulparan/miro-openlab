@@ -1,0 +1,60 @@
+h1 {
+  color: red;
+  background-color:cornflowerblue;
+}
+
+h2 {
+  color: green;
+  background-color:rgb(196, 140, 20);
+}
+
+#intro {
+  color: black;
+}
+
+
+.contents {
+  color: black;
+}
+
+.important {
+  font-weight: bold;
+}
+
+.a {
+  text-decoration: underline;
+}
+
+#theme {
+  font-weight: bold;
+  background-color: red;
+  text-decoration: underline;
+}
+
+.btn {
+  border: 1px solid skyblue;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  color: skyblue;
+}
+
+.btn:active {
+  border: 1px solid red;
+  color: red;
+}
+
+#buttonGroup {
+  width: 310px;
+  height: 100px;
+  background-color: black;
+}
+
+#rangeGroup {
+  position: absolute;
+  left: 320px;
+  top: 8px;
+  width: 310px;
+  height: 100px;
+  background-color: orange;
+}
