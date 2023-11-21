@@ -7,10 +7,10 @@ let snareBuffer;
 let hihatBuffer;
 let pianoBuffer;
 
-loadSample('statics/kick.wav', buffer=>{ kickBuffer = buffer; });
-loadSample('statics/snare.wav', buffer=>{ snareBuffer = buffer; });
-loadSample('statics/hihat.wav', buffer=>{ hihatBuffer = buffer; });
-loadSample('statics/piano.wav', buffer=>{ pianoBuffer = buffer; });
+loadSample('resources/kick.wav', buffer=>{ kickBuffer = buffer; });
+loadSample('resources/snare.wav', buffer=>{ snareBuffer = buffer; });
+loadSample('resources/hihat.wav', buffer=>{ hihatBuffer = buffer; });
+loadSample('resources/piano.wav', buffer=>{ pianoBuffer = buffer; });
 
 function loadSample(url, handle) {
   let xhr = new XMLHttpRequest();

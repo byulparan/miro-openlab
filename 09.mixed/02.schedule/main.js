@@ -12,9 +12,9 @@ let kick;
 let snare;
 let hihat;
 
-loadSample("statics/kick.wav", buffer => { kick = buffer;});
-loadSample("statics/snare.wav", buffer => { snare = buffer;});
-loadSample("statics/hihat.wav", buffer => { hihat = buffer;});
+loadSample("resources/kick.wav", buffer => { kick = buffer;});
+loadSample("resources/snare.wav", buffer => { snare = buffer;});
+loadSample("resources/hihat.wav", buffer => { hihat = buffer;});
 
 melodyNote = 69;
 
