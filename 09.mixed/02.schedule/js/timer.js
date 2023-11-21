@@ -19,41 +19,41 @@ loadSample("statics/hihat.wav", buffer => { hihat = buffer;});
 melodyNote = 69;
 
 function metro() {
-  if (context.currentTime >= scheduleTime) {
+  if (context.currentTime+0.2 >= scheduleTime) {
 
     if (scheduleTick % 2 == 0) {
-      playSample(hihat, Math.random() * 0.5 + 0.5);
+      playSample(scheduleTime, hihat, Math.random() * 0.5 + 0.5);
       melodyNote = choose([69, 72, 74, 79, 83]);
 
     }
 
     if (scheduleTick % 16 == 0) {
-      playSample(kick, 1.0); 
+      playSample(scheduleTime, kick, 1.0); 
     }
 
     if (scheduleTick % 16 == 8) {
       melodyNote = 69;
-      playSample(snare, 1.0); 
+      playSample(scheduleTime, snare, 1.0); 
     }
 
 
     if (scheduleTick % 32 == 0) {
-      chord(chordSelect);
+      chord(scheduleTime, chordSelect);
       chordSelect += 1;
     }
 
 
-    melody();
+    melody(scheduleTime);
     scheduleTime = scheduleTime + 0.1;
     scheduleTick += 1;
   }
-  setTimeout(metro, 30);
+  
+  setTimeout(metro, 10);
 }
 
 
 
-function chord(chordSelect) {
-  let now = context.currentTime;
+function chord(time, chordSelect) {
 
   let notes = [ [64, 67, 71, 74], [65, 69, 72, 76] ][chordSelect % 2];
   let env = context.createGain();
@@ -70,38 +70,38 @@ function chord(chordSelect) {
     osc.frequency.value = midicps(notes[i]);
     osc.type = "sawtooth";
     osc.connect(env);
-    osc.start();
-    osc.stop(now + 4.0);
+    osc.start(time);
+    osc.stop(time + 4.0);
   }
-  env.gain.linearRampToValueAtTime(0.1, now + 2.0 );
-  env.gain.linearRampToValueAtTime(0.0, now + 4.0 );
+  env.gain.linearRampToValueAtTime(0.1, time + 2.0 );
+  env.gain.linearRampToValueAtTime(0.0, time + 4.0 );
 }
 
-function playSample(buffer, amp) {
+function playSample(time,buffer, amp) {
   let src = context.createBufferSource();
   let gain = context.createGain();
   src.buffer = buffer;
   gain.gain.value = amp;
   src.connect(gain);
   gain.connect(context.destination);
-  src.start();
-  src.stop(context.currentTime + 1.0);
+  src.start(time);
+  src.stop(time + 1.0);
 }
 
 
-function melody() {
+function melody(time) {
   let osc = context.createOscillator();
   let env = context.createGain();
   osc.frequency.value = midicps(melodyNote);
   env.gain.value = 0.0;
-  env.gain.linearRampToValueAtTime(0.2, context.currentTime + 0.1);
-  env.gain.linearRampToValueAtTime(0.0, context.currentTime + 0.2);
+  env.gain.linearRampToValueAtTime(0.2, time + 0.1);
+  env.gain.linearRampToValueAtTime(0.0, time + 0.2);
 
   osc.connect(env);
   env.connect(context.destination);
 
-  osc.start();
-  osc.stop(context.currentTime + 0.3);
+  osc.start(time);
+  osc.stop(time + 0.3);
 }
 
 
