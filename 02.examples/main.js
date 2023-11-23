@@ -4,6 +4,7 @@ class Circle {
     this.x = x;
     this.y = y;
     this.size = random(10, 50);
+    this.seed = Math.random() * TAU;
     this.lifeTime = 255;
     this.color = color(random(0,255), random(0,255), random(0,255));
   }
@@ -16,7 +17,7 @@ class Circle {
       noStroke();
       fill(this.color);
     }
-    this.size += sin(millis()) * 10;
+    this.size += sin(millis() + this.seed) * 10;
     ellipse(this.x, this.y, this.size, this.size);
     this.lifeTime -= 5;
   }
